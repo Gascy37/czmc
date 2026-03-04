@@ -6,8 +6,12 @@
     <title>创造材质主页</title>
 <style>
 body {
-background: linear-gradient(155deg, #ffd0e8, #99bbff);
-background-attachment: fixed;
+    /* 基础背景由下方脚本动态控制，此处移除静态渐变避免闪烁 */
+    background-attachment: fixed;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 #snow-canvas {
@@ -16,8 +20,35 @@ background-attachment: fixed;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none;  /* 让雪花不干扰点击事件 */
-    z-index: 10;            /* 置于内容上方但允许点击穿透，如需放在背景层可改为0，并确保文字z-index更高 */
+    pointer-events: none;
+    z-index: 10;
+}
+
+#changelog-content {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* 新增的版本日志结构化样式 */
+.version-block {
+    margin-bottom: 10px;
+}
+.version-title {
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+    display: inline-block;
+    margin: 15px 0 5px 0;
+}
+.changelog-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0 0 15px 0;
+}
+.changelog-list li {
+    margin-bottom: 2px;
 }
 </style>
 </head>
@@ -70,192 +101,340 @@ background-attachment: fixed;
     <span style="color:#7aa5d9; font-size: 24px; font-weight: bold; border: 1px solid black; border-radius: 6px; padding: 4px 8px; display: inline-block;">更新日志</span>
 </p>
 
-    <div style="color: #2c3e50;">
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v2.5.6 - 2.9.9:</span><br>
-        挖掘动画更新<br>
-        UI贴图修复<br>
-        已隐藏触摸圆圈<br>
-        新增导入存档按钮<br>
-        触控优化<br>
-        存储设置极简<br>
-        正在进入游戏的UI修改<br>
-        主界面UI修改<br>
-        游戏暂停界面修改<br>
-        更新血量、盔甲、工具贴图<br>
-        修改气泡和金苹果的贴图<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v3.0.0:</span><br>
-        更新主界面音乐<br>
-        修改疾跑按钮<br>
-        点击音效更改<br>
-        环境饱和度更低<br>
-        新字体<br>
-        UI贴图更换<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v3.2.0:</span><br>
-        去除多余子包<br>
-        透明物品展示框<br>
-        可视化附魔<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v3.5.0</span><br>
-        地形方块翻新<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v4.0.0:</span><br>
-        添加发光敌对生物<br>
-        增加烟雾<br>
-        更清澈的水<br>
-        测试版功能增加矿透<br>
-        删除专属天空和护眼大补丸子包<br>
-        删除主界面音乐<br>
-        增加一键合成<br>
-        删除铁砧命名<br>
-        更改云贴图<br>
-        增加更多音效<br>
-        3D重锤<br>
-        南瓜头贴图变淡<br>
-        望远镜边框删除<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v4.0.1:</span><br>
-        删除食物的贴图<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v4.3.0:</span><br>
-        把受伤颜色改为白色<br>
-        添加3D不死图腾<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v4.5.0:</span><br>
-        添加3D盔甲背包<br>
-        站立的生物<br>
-        帧率显示<br>
-        新增去除粒子效果子包<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v4.6.3</span><br>
-        修复骆驼动画问题<br>
-        修复设置界面VR按钮不被引用的问题<br>
-        背包弹窗<br>
-        删除意义不明的UI贴图<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v4.6.5:</span><br>
-        修复了一堆问题<br>
-        更改了进度条和经验条的贴图<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v4.7.0:</span><br>
-        删除了背包弹窗<br>
-        删除了站立的生物<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v4.8.0:</span><br>
-        修改水流伪池核美学风格<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v4.9.0:</span><br>
-        将显示天数和坐标移至物品栏上方<br>
-        更换按钮贴图<br>
-        去除动作优化子包<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v4.9.10:</span><br>
-        新的设置界面<br>
-        新的音频设置界面<br>
-        按钮改为深色<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v4.9.20:</span><br>
-        删除测试版功能子包<br>
-        纸娃娃更好的位置修改<br>
-        修改草方块草皮扩展至整个方块<br>
-        星彩图腾<br>
-        删除了很多植物的贴图<br>
-        更改帧率显示的UI<br>
-        将点击音效声音放大<br>
-        更新挖掘动画<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v4.9.30:</span><br>
-        暂停界面更改<br>
-        低火<br>
-        进度条修改<br>
-        草方块鞘翅<br>
-        修复生物蛋贴图没有适配最新版的问题<br>
-        进度条扩宽<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v4.9.40:</span><br>
-        更真实的天空环境<br>
-        新增蓝色按钮<br>
-        隐藏云<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v4.9.50:</span><br>
-        修复草方块底部贴图<br>
-        强制绑定铁傀儡披风<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v4.9.60:</span><br>
-        增加图标<br>
-        去除阴影字体<br>
-        去除药水粒子效果<br>
-        修改了进入realms服务器的背景图<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v4.9.65:</span><br>
-        去除隐藏云<br>
-        修复了文字冲突<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v5.0.0:</span><br>
-        修复岩浆纹理问题<br>
-        删除显示坐标插件<br>
-        调整纸娃娃位置<br>
-        更和谐的天空<br>
-        挖掘动画更新<br>
-        文字兼容性增强<br>
-        村民更多音效<br>
-        修复一堆问题，懒得说了<br>
-        引入一部分液态3D新UI<br>
-        盔甲改进<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v5.1.0</span><br>
-        修复门的贴图问题<br>
-        增加显示触摸圆圈子包<br>
-        修改下雨粒子<br>
-        修复草方块不协调贴图问题<br>
-        增加火烈鸟光影子包<br>
-        玩家追踪新功能<br>
-        更改箱子贴图<br>
-        调整纸娃娃大小<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v6.0.0:</span><br>
-        优化存储设置<br>
-        删除坐标、天数背景<br>
-        删除火烈鸟光影子包<br>
-        增加后室摇杆子包<br>
-        物品栏修改<br>
-        地形全面更新，方块全部翻新，以护眼大补丸为主<br>
-        植物晃动<br>
-        工具翻新<br>
-        增加标题<br>
-        增加天空盒子包<br>
-        新增南瓜头深色模式子包<br>
-        优化了水底能见度<br>
-        修改工具<br>
-        修复5.1.0的进入游戏时闪退问题(删除了玩家追踪)<br>
-        工作台贴图<br>
-        增加状态图标<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v6.1.0</span><br>
-        可换行铁砧命名<br>
-        聊天框指令点击自动补全<br>
-        抖音国际版披风<br>
-        动态炫彩光羊毛<br>
-        进入存档时新背景图<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v6.4.0</span><br>
-        删除南瓜头深色模式子包<br>
-        恢复旧版授权界面<br>
-        更改进入存档和进入realms服务器的背景图<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v6.7.0</span><br>
-        设置按钮调大<br>
-        修复雪的贴图<br>
-        增加不显示帧率子包<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v6.8.0</span><br>
-        更改太阳和月亮的贴图为3D<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v6.9.1</span><br>
-        修复门的贴图问题<br>
-        恢复被误删的背包物品选中<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v7.0.0</span><br>
-        删除云<br>
-        修改箱子UI边框<br>
-        新增快速搬运功能<br>
-        后室摇杆删除，更改为网易版摇杆<br>
-        更改了千年不变背景图的滤镜<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v7.0.1</span><br>
-        修改了快速搬运默认颜色<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v7.0.4</span><br>
-        全局聊天信息背景改为透明<br>
-        新增不显示帧率+显示触摸圆圈子包<br>
-        修复显示触摸圆圈子包下背包按钮的尺寸问题<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v7.0.5</span><br>
-        减少下雨粒子效果<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v8.0.0</span><br>
-        设置按钮调小<br>
-        屏幕上增加微黑色遮罩以增加沉浸感<br>
-        新增物品显示功能<br>
-        新增不显示物品子包<br>
-        修改选中按钮颜色<br>
-        修改进度条颜色<br>
-        修改物品标签选中颜色<br>
-        修改手持物品名字背景<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v8.2.0</span><br>
-        删除微黑色遮罩<br>
-        适配合成界面UI<br>
-        <span style="font-weight:bold; font-size: 20px; color: black; display: inline-block; margin: 15px 0 5px 0;">v8.2.1</span><br>
-        进一步适配合成界面UI
+    <!-- 重构后的更新日志内容，结构清晰易维护 -->
+    <div id="changelog-content" style="color: #2c3e50;">
+        <div class="version-block">
+            <div class="version-title">v2.5.6 - 2.9.9:</div>
+            <ul class="changelog-list">
+                <li>挖掘动画更新</li>
+                <li>UI贴图修复</li>
+                <li>已隐藏触摸圆圈</li>
+                <li>新增导入存档按钮</li>
+                <li>触控优化</li>
+                <li>存储设置极简</li>
+                <li>正在进入游戏的UI修改</li>
+                <li>主界面UI修改</li>
+                <li>游戏暂停界面修改</li>
+                <li>更新血量、盔甲、工具贴图</li>
+                <li>修改气泡和金苹果的贴图</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v3.0.0:</div>
+            <ul class="changelog-list">
+                <li>更新主界面音乐</li>
+                <li>修改疾跑按钮</li>
+                <li>点击音效更改</li>
+                <li>环境饱和度更低</li>
+                <li>新字体</li>
+                <li>UI贴图更换</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v3.2.0:</div>
+            <ul class="changelog-list">
+                <li>去除多余子包</li>
+                <li>透明物品展示框</li>
+                <li>可视化附魔</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v3.5.0</div>
+            <ul class="changelog-list">
+                <li>地形方块翻新</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v4.0.0:</div>
+            <ul class="changelog-list">
+                <li>添加发光敌对生物</li>
+                <li>增加烟雾</li>
+                <li>更清澈的水</li>
+                <li>测试版功能增加矿透</li>
+                <li>删除专属天空和护眼大补丸子包</li>
+                <li>删除主界面音乐</li>
+                <li>增加一键合成</li>
+                <li>删除铁砧命名</li>
+                <li>更改云贴图</li>
+                <li>增加更多音效</li>
+                <li>3D重锤</li>
+                <li>南瓜头贴图变淡</li>
+                <li>望远镜边框删除</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v4.0.1:</div>
+            <ul class="changelog-list">
+                <li>删除食物的贴图</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v4.3.0:</div>
+            <ul class="changelog-list">
+                <li>把受伤颜色改为白色</li>
+                <li>添加3D不死图腾</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v4.5.0:</div>
+            <ul class="changelog-list">
+                <li>添加3D盔甲背包</li>
+                <li>站立的生物</li>
+                <li>帧率显示</li>
+                <li>新增去除粒子效果子包</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v4.6.3</div>
+            <ul class="changelog-list">
+                <li>修复骆驼动画问题</li>
+                <li>修复设置界面VR按钮不被引用的问题</li>
+                <li>背包弹窗</li>
+                <li>删除意义不明的UI贴图</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v4.6.5:</div>
+            <ul class="changelog-list">
+                <li>修复了一堆问题</li>
+                <li>更改了进度条和经验条的贴图</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v4.7.0:</div>
+            <ul class="changelog-list">
+                <li>删除了背包弹窗</li>
+                <li>删除了站立的生物</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v4.8.0:</div>
+            <ul class="changelog-list">
+                <li>修改水流伪池核美学风格</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v4.9.0:</div>
+            <ul class="changelog-list">
+                <li>将显示天数和坐标移至物品栏上方</li>
+                <li>更换按钮贴图</li>
+                <li>去除动作优化子包</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v4.9.10:</div>
+            <ul class="changelog-list">
+                <li>新的设置界面</li>
+                <li>新的音频设置界面</li>
+                <li>按钮改为深色</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v4.9.20:</div>
+            <ul class="changelog-list">
+                <li>删除测试版功能子包</li>
+                <li>纸娃娃更好的位置修改</li>
+                <li>修改草方块草皮扩展至整个方块</li>
+                <li>星彩图腾</li>
+                <li>删除了很多植物的贴图</li>
+                <li>更改帧率显示的UI</li>
+                <li>将点击音效声音放大</li>
+                <li>更新挖掘动画</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v4.9.30:</div>
+            <ul class="changelog-list">
+                <li>暂停界面更改</li>
+                <li>低火</li>
+                <li>进度条修改</li>
+                <li>草方块鞘翅</li>
+                <li>修复生物蛋贴图没有适配最新版的问题</li>
+                <li>进度条扩宽</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v4.9.40:</div>
+            <ul class="changelog-list">
+                <li>更真实的天空环境</li>
+                <li>新增蓝色按钮</li>
+                <li>隐藏云</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v4.9.50:</div>
+            <ul class="changelog-list">
+                <li>修复草方块底部贴图</li>
+                <li>强制绑定铁傀儡披风</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v4.9.60:</div>
+            <ul class="changelog-list">
+                <li>增加图标</li>
+                <li>去除阴影字体</li>
+                <li>去除药水粒子效果</li>
+                <li>修改了进入realms服务器的背景图</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v4.9.65:</div>
+            <ul class="changelog-list">
+                <li>去除隐藏云</li>
+                <li>修复了文字冲突</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v5.0.0:</div>
+            <ul class="changelog-list">
+                <li>修复岩浆纹理问题</li>
+                <li>删除显示坐标插件</li>
+                <li>调整纸娃娃位置</li>
+                <li>更和谐的天空</li>
+                <li>挖掘动画更新</li>
+                <li>文字兼容性增强</li>
+                <li>村民更多音效</li>
+                <li>修复一堆问题，懒得说了</li>
+                <li>引入一部分液态3D新UI</li>
+                <li>盔甲改进</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v5.1.0</div>
+            <ul class="changelog-list">
+                <li>修复门的贴图问题</li>
+                <li>增加显示触摸圆圈子包</li>
+                <li>修改下雨粒子</li>
+                <li>修复草方块不协调贴图问题</li>
+                <li>增加火烈鸟光影子包</li>
+                <li>玩家追踪新功能</li>
+                <li>更改箱子贴图</li>
+                <li>调整纸娃娃大小</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v6.0.0:</div>
+            <ul class="changelog-list">
+                <li>优化存储设置</li>
+                <li>删除坐标、天数背景</li>
+                <li>删除火烈鸟光影子包</li>
+                <li>增加后室摇杆子包</li>
+                <li>物品栏修改</li>
+                <li>地形全面更新，方块全部翻新，以护眼大补丸为主</li>
+                <li>植物晃动</li>
+                <li>工具翻新</li>
+                <li>增加标题</li>
+                <li>增加天空盒子包</li>
+                <li>新增南瓜头深色模式子包</li>
+                <li>优化了水底能见度</li>
+                <li>修改工具</li>
+                <li>修复5.1.0的进入游戏时闪退问题(删除了玩家追踪)</li>
+                <li>工作台贴图</li>
+                <li>增加状态图标</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v6.1.0</div>
+            <ul class="changelog-list">
+                <li>可换行铁砧命名</li>
+                <li>聊天框指令点击自动补全</li>
+                <li>抖音国际版披风</li>
+                <li>动态炫彩光羊毛</li>
+                <li>进入存档时新背景图</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v6.4.0</div>
+            <ul class="changelog-list">
+                <li>删除南瓜头深色模式子包</li>
+                <li>恢复旧版授权界面</li>
+                <li>更改进入存档和进入realms服务器的背景图</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v6.7.0</div>
+            <ul class="changelog-list">
+                <li>设置按钮调大</li>
+                <li>修复雪的贴图</li>
+                <li>增加不显示帧率子包</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v6.8.0</div>
+            <ul class="changelog-list">
+                <li>更改太阳和月亮的贴图为3D</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v6.9.1</div>
+            <ul class="changelog-list">
+                <li>修复门的贴图问题</li>
+                <li>恢复被误删的背包物品选中</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v7.0.0</div>
+            <ul class="changelog-list">
+                <li>删除云</li>
+                <li>修改箱子UI边框</li>
+                <li>新增快速搬运功能</li>
+                <li>后室摇杆删除，更改为网易版摇杆</li>
+                <li>更改了千年不变背景图的滤镜</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v7.0.1</div>
+            <ul class="changelog-list">
+                <li>修改了快速搬运默认颜色</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v7.0.4</div>
+            <ul class="changelog-list">
+                <li>全局聊天信息背景改为透明</li>
+                <li>新增不显示帧率+显示触摸圆圈子包</li>
+                <li>修复显示触摸圆圈子包下背包按钮的尺寸问题</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v7.0.5</div>
+            <ul class="changelog-list">
+                <li>减少下雨粒子效果</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v8.0.0:</div>
+            <ul class="changelog-list">
+                <li>设置按钮调小</li>
+                <li>屏幕上增加微黑色遮罩以增加沉浸感</li>
+                <li>新增物品显示功能</li>
+                <li>新增不显示物品子包</li>
+                <li>修改选中按钮颜色</li>
+                <li>修改进度条颜色</li>
+                <li>修改物品标签选中颜色</li>
+                <li>修改手持物品名字背景</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v8.2.0:</div>
+            <ul class="changelog-list">
+                <li>删除微黑色遮罩</li>
+                <li>适配合成界面UI</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v8.2.1:</div>
+            <ul class="changelog-list">
+                <li>进一步适配合成界面UI</li>
+            </ul>
+        </div>
+        <div class="version-block">
+            <div class="version-title">v8.4.1:</div>
+            <ul class="changelog-list">
+                <li>将背包物品显示UI往上移动以防止与护甲值冲突</li>
+                <li>优化下雨效果，去除无用下雨粒子</li>
+            </ul>
+        </div>
     </div>
 </div>
 
@@ -267,59 +446,53 @@ background-attachment: fixed;
     const ctx = canvas.getContext('2d');
     
     let width, height;
-    const SNOW_COUNT = 21;          // 雪花总数
-    const SNOW_OPACITY = 0.7;       // 半透明度 (0~1)
-    const MIN_SPEED = 0.8;           // 最小下落速度
-    const MAX_SPEED = 2.5;           // 最大下落速度
-    const MIN_SIZE = 3;              // 最小雪花半径 (px)
-    const MAX_SIZE = 8;              // 最大雪花半径 (px)
-    const DRIFT = 0.5;               // 左右飘移幅度 (px/帧)
+    const SNOW_COUNT = 21;
+    const SNOW_OPACITY = 0.7;
+    const MIN_SPEED = 0.8;
+    const MAX_SPEED = 2.5;
+    const MIN_SIZE = 3;
+    const MAX_SIZE = 8;
+    const DRIFT = 0.5;
 
     let snowflakes = [];
 
-    // 初始化所有雪花
     function initSnow() {
         for (let i = 0; i < SNOW_COUNT; i++) {
             snowflakes.push({
                 x: Math.random() * width,
-                y: Math.random() * height,      // 随机分布在屏幕内（包括可能上方）
+                y: Math.random() * height,
                 size: MIN_SIZE + Math.random() * (MAX_SIZE - MIN_SIZE),
                 speedY: MIN_SPEED + Math.random() * (MAX_SPEED - MIN_SPEED),
-                speedX: (Math.random() - 0.5) * DRIFT,  // 左右漂移
+                speedX: (Math.random() - 0.5) * DRIFT,
                 opacity: SNOW_OPACITY,
             });
         }
     }
 
-    // 重置雪花到屏幕外顶部（当它掉出屏幕时）
     function resetSnowflake(flake) {
-        flake.x = Math.random() * width;            // 随机水平位置
-        flake.y = -flake.size;                       // 置于屏幕上方之外
+        flake.x = Math.random() * width;
+        flake.y = -flake.size;
         flake.speedY = MIN_SPEED + Math.random() * (MAX_SPEED - MIN_SPEED);
         flake.speedX = (Math.random() - 0.5) * DRIFT;
         flake.size = MIN_SIZE + Math.random() * (MAX_SIZE - MIN_SIZE);
     }
 
-    // 更新所有雪花位置
     function updateSnow() {
         for (let i = 0; i < snowflakes.length; i++) {
             const f = snowflakes[i];
             f.x += f.speedX;
             f.y += f.speedY;
 
-            // 如果雪花完全超出屏幕底部（包括大小），重置
             if (f.y - f.size > height) {
                 resetSnowflake(f);
             }
 
-            // 如果超出左右边界，可反向或重置，这里选择重置到另一边，但为了更自然，让它重新从顶部飘落
             if (f.x + f.size < 0 || f.x - f.size > width) {
                 resetSnowflake(f);
             }
         }
     }
 
-    // 绘制所有雪花
     function drawSnow() {
         ctx.clearRect(0, 0, width, height);
         ctx.fillStyle = 'white';
@@ -332,27 +505,71 @@ background-attachment: fixed;
         }
     }
 
-    // 动画循环
     function animate() {
         updateSnow();
         drawSnow();
         requestAnimationFrame(animate);
     }
 
-    // 处理窗口大小变化
     function onResize() {
         width = window.innerWidth;
         height = window.innerHeight;
         canvas.width = width;
         canvas.height = height;
-        // 重新初始化雪花位置以适应新窗口尺寸（可选，但为了简单，重置所有雪花到随机位置）
         snowflakes = [];
         initSnow();
     }
 
     window.addEventListener('resize', onResize);
-    onResize();  // 初始化尺寸并创建雪花
+    onResize();
     animate();
+})();
+</script>
+
+<script>
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('selectstart', e => {
+    if (!e.target.closest('#changelog-content')) e.preventDefault();
+});
+document.addEventListener('copy', e => {
+    const selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+        let container = selection.getRangeAt(0).commonAncestorContainer;
+        if (container.nodeType === 3) container = container.parentNode;
+        if (container.closest && container.closest('#changelog-content')) {
+            return;
+        }
+    }
+    e.preventDefault();
+});
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('paste', e => e.preventDefault());
+</script>
+
+<script>
+// 根据精确时间（分钟级）自动切换背景色
+(function() {
+    const now = new Date();
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+    const totalMinutes = hour * 60 + minute;
+
+    let bgGradient;
+    // 特殊：凌晨2:00~2:59 (120-179) 血红暗红渐变
+    if (totalMinutes >= 120 && totalMinutes <= 179) {
+        bgGradient = 'linear-gradient(155deg, #dd0000, #4d0000)'; // 血红 + 暗红
+    }
+    // 深色时段：凌晨3:00~早晨6:00 (180-360) 或 傍晚6:00~凌晨1:59 (>=1080 或 <120)
+    else if ((totalMinutes >= 180 && totalMinutes <= 360) || (totalMinutes >= 1080) || (totalMinutes < 120)) {
+        bgGradient = 'linear-gradient(155deg, #ff79c3, #3399ff)'; // 正常深色（原夜晚渐变）
+    }
+    // 其余为浅色时段：早晨6:01~傍晚5:59 (361-1079)
+    else {
+        bgGradient = 'linear-gradient(155deg, #ffd0e8, #99bbff)'; // 正常浅色（原白天渐变）
+    }
+
+    document.body.style.background = bgGradient;
+    document.body.style.backgroundAttachment = 'fixed';
 })();
 </script>
 
