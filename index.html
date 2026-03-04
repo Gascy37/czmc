@@ -555,9 +555,9 @@ document.addEventListener('paste', e => e.preventDefault());
     const totalMinutes = hour * 60 + minute;
 
     let bgGradient;
-    // 特殊：凌晨2:00~2:59 (120-179) 血红暗红渐变
+    // 特殊：凌晨2:00~2:59 (120-179) 血红灰红暗红渐变
     if (totalMinutes >= 120 && totalMinutes <= 179) {
-        bgGradient = 'linear-gradient(155deg, #dd0000, #4d0000)'; // 血红 + 暗红
+        bgGradient = 'linear-gradient(155deg, #d52727, #504a4a, #821212)'; // 血红 + 灰红 + 暗红
     }
     // 深色时段：凌晨3:00~早晨6:00 (180-360) 或 傍晚6:00~凌晨1:59 (>=1080 或 <120)
     else if ((totalMinutes >= 180 && totalMinutes <= 360) || (totalMinutes >= 1080) || (totalMinutes < 120)) {
