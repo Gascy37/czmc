@@ -6,7 +6,6 @@
     <title>创造材质主页</title>
 <style>
 body {
-    /* 基础背景由下方脚本动态控制，此处移除静态渐变避免闪烁 */
     background-attachment: fixed;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -31,7 +30,6 @@ body {
     user-select: text;
 }
 
-/* 新增的版本日志结构化样式 */
 .version-block {
     margin-bottom: 10px;
 }
@@ -73,6 +71,11 @@ body {
 <p style="color: gray;">( 网盘为小飞机网盘，提取码: czmc )</p>
 
 <a href="https://share.feijipan.com/s/ezFW9j7w" class="button" style="background-color: #FF79C3; color: white; padding: 12px 24px; font-size: 18px; text-decoration: none; border-radius: 2px; box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.4);">下载</a>
+
+<hr style="margin-top: 30px; margin-bottom: 20px; border: none; height: 3px; background-color: black; border-radius: 3px;">
+
+<div style="margin-top: 20px; font-size: 36px;">可复制链接:</div>
+<a href="javascript:void(0)" style="background-color: #75FF80; color: white; padding: 12px 24px; font-size: 18px; text-decoration: none; border-radius: 2px; box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.4); display: inline-block; margin-top: 8px;" onclick="handleCopy(this); return false;">复制</a>
 
 <hr style="margin-top: 30px; border: none; height: 3px; background-color: black; border-radius: 3px;">
 
@@ -571,6 +574,22 @@ document.addEventListener('paste', e => e.preventDefault());
     document.body.style.background = bgGradient;
     document.body.style.backgroundAttachment = 'fixed';
 })();
+</script>
+
+<!-- 新增的复制按钮交互函数 -->
+<script>
+function handleCopy(btn) {
+    const text = '创造材质:\n主页: https://gascy37.github.io/czmc/\n创造材质旧版下载: https://share.feijipan.com/s/ezFW9j7w 提取码：czmc\n创造材质新版下载: https://www.123684.com/s/3ce4vd-DedAh?pwd=P2u7 提取码:P2u7';
+    navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.textContent;
+        btn.textContent = '√';
+        setTimeout(() => {
+            btn.textContent = originalText;
+        }, 1000);
+    }).catch(() => {
+        // 复制失败时不改变文字（可忽略）
+    });
+}
 </script>
 
 </body>
